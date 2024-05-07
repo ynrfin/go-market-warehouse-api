@@ -1,4 +1,4 @@
-FROM golang:1.22
+FROM golang:1.22 AS build-stage
 
 WORKDIR /app
 
@@ -8,8 +8,8 @@ RUN go mod download
 
 COPY . ./
 
-RUN CGO_ENABLED=0 GOOS=linux go build -o /docker-gs-ping ./cmd/main.go
+RUN CGO_ENABLED=0 GOOS=linux go build -o /go-market-warehouse-api ./cmd/main.go
 
 EXPOSE 8000
 
-CMD [ "/docker-gs-ping" ]
+CMD [ "/go-market-warehouse-api" ]

@@ -35,7 +35,7 @@ services:
     volumes:
       - tes-pg:/var/lib/postgresql/data
     environment:
-      - POSTGRES_PASSWORD=${PGPASSWORD}
+      - POSTGRES_PASSWORD=${PGPASSWORD:-admin123}
     # Make sure postgres is ready to accept connection as the indicator that 
     # Postgres is ready
     # ref https://www.postgresql.org/docs/current/app-pg-isready.html

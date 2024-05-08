@@ -1,3 +1,13 @@
+This is a toy project for portofolio and exploration.
+
+To run this, in linux / mac :
+```
+chmod 755 dbuild.sh
+./dbuild.sh
+```
+
+For windows, just build the docker image using Dockerfile and then run docker compose. As stated in `dbuild.sh`
+
 # Docker Compose: sometimes the application not wait for postgre
 
 Keep rerun the compose file, I still could not find the right way to wait for postgres service to be started and available.

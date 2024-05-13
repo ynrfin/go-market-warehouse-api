@@ -1,11 +1,11 @@
 meta {
-  name: Create User
+  name: List User
   type: http
   seq: 1
 }
 
-post {
-  url: {{baseUrl}}/users/
+get {
+  url: {{baseUrl}}/users
   body: json
   auth: none
 }

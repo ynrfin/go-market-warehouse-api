@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "go-market-warehouse-api",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

@@ -6,16 +6,20 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/go-playground/validator/v10"
 	"github.com/labstack/echo/v4"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"ynrfin.github.com/golang-warehouse-marketplace-api/controllers"
+	"ynrfin.github.com/golang-warehouse-marketplace-api/middlewares"
 	"ynrfin.github.com/golang-warehouse-marketplace-api/models"
 	"ynrfin.github.com/golang-warehouse-marketplace-api/repositories"
 )
 
 func main() {
 	e := echo.New()
+	e.Validator = &middlewares.CustomValidator{Validator: validator.New()}
+
 	log.Println("request received")
 	ENV_PGUSER := os.Getenv("PGUSER")
 	ENV_PGPASS := os.Getenv("PGPASSWORD")

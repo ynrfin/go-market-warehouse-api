@@ -25,3 +25,8 @@ func (u UserRepository) GetUsers() (users []User, err error) {
 	err = u.Db.Find(&users).Error
 	return users, err
 }
+
+func (u UserRepository) GetUserById(id uuid.UUID) (user User, err error) {
+	err = u.Db.Model(&user).Where("id", id).First(&user).Error
+	return user, err
+}

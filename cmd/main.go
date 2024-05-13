@@ -38,8 +38,7 @@ func main() {
 		db.Find(&users)
 		return c.JSON(http.StatusOK, users)
 	})
-	e.GET("/users/", controllers.HandleCreateUser)
-	e.POST("/users/", UserHandler.HandleListUser)
+	e.GET("/users", UserHandler.HandleListUser)
 
 	e.Start(":8080")
 }

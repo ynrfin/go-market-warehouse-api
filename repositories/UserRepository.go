@@ -7,8 +7,9 @@ import (
 
 type (
 	User struct {
-		ID   uuid.UUID
-		Name string
+		ID    uuid.UUID
+		Name  string
+		Email string
 	}
 
 	UserRepository struct {
@@ -28,5 +29,10 @@ func (u UserRepository) GetUsers() (users []User, err error) {
 
 func (u UserRepository) GetUserById(id uuid.UUID) (user User, err error) {
 	err = u.Db.Model(&user).Where("id", id).First(&user).Error
+	return user, err
+}
+
+func (u UserRepository) GetUserByEmail(email string) (user User, err error) {
+	err = u.Db.Model(&user).Where("email", email).First(&user).Error
 	return user, err
 }

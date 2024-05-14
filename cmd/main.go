@@ -44,6 +44,7 @@ func main() {
 	})
 	e.GET("/users/:id", UserHandler.HandleGetUser)
 	e.GET("/users", UserHandler.HandleListUser)
+	e.POST("/users", UserHandler.HandleCreateUser)
 
 	e.Start(":8080")
 }

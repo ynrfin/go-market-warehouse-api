@@ -1,8 +1,10 @@
 services:
   go-market-warehouse-api:
-    depends_on:
-      local-pg-16:
-        condition: service_healthy
+    depends_on: 
+      - migrate
+    # depends_on:
+      # local-pg-16:
+      #   condition: service_healthy
     # always restart when app crashes
     restart: always
     build:
@@ -33,7 +35,7 @@ services:
       - 5432:5432
       - 8080:8080
     volumes:
-      - tes-pg:/var/lib/postgresql/data
+      - postgres-16:/var/lib/postgresql/data
     environment:
       - POSTGRES_PASSWORD=${PGPASSWORD:-admin123}
     # Make sure postgres is ready to accept connection as the indicator that 
@@ -46,8 +48,18 @@ services:
       interval: 2s
       timeout: 10s
       retries: 5
+  migrate:
+    image: migrate/migrate
+    depends_on:
+      local-pg-16:
+        condition: service_healthy
+    networks:
+      - my-local-net
+    volumes:
+      - ./migrations/:/migrations
+    command: ["-path", "/migrations/", "-database", "postgres://${PGUSER}:${PGPASSWORD}@local-pg-16:5432/postgres?sslmode=disable", "up"]
 volumes:
-  tes-pg:
+  postgres-16:
     external: true
 
 networks:
